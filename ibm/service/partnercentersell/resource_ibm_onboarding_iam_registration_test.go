@@ -55,6 +55,19 @@ func TestAccIbmOnboardingIamRegistrationAllArgs(t *testing.T) {
 	nameUpdate := acc.PcsIamServiceRegistrationId
 	enabledUpdate := "true"
 	serviceTypeUpdate := "service"
+	actionDescription := "default"
+	actionDescriptionUpdate := "default_2"
+	supportedAttributeDisplayName := "default"
+	supportedAttributeDisplayNameUpdate := "default_2"
+	supportedAttributeInputDetailsDisplayName := "default"
+	supportedAttributeInputDetailsDisplayNameUpdate := "default_2"
+	supportedAuthorizationSubjectsService := "serviceName"
+	supportedAuthorizationSubjectsServiceUpdate := "serviceName2"
+	environmentAttributesValues := "public"
+	environmentAttributesValuesUpdate := "private"
+	supportedAnonymousAccessesAdditionalPropValue := "additional"
+	supportedAnonymousAccessesAdditionalPropValueUpdate := "additionals"
+	// supportedAnonymousAccessesAccId := "account_id_2"
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { acc.TestAccPreCheckPartnerCenterSell(t) },
@@ -62,7 +75,22 @@ func TestAccIbmOnboardingIamRegistrationAllArgs(t *testing.T) {
 		CheckDestroy: testAccCheckIbmOnboardingIamRegistrationDestroy,
 		Steps: []resource.TestStep{
 			resource.TestStep{
-				Config: testAccCheckIbmOnboardingIamRegistrationConfig(productID, env, name, enabled, serviceType, iamRegistrationRole, roleDisplayName, acc.PcsIamServiceRegistrationId),
+				Config: testAccCheckIbmOnboardingIamRegistrationConfig(
+					productID,
+					env,
+					name,
+					enabled,
+					serviceType,
+					iamRegistrationRole,
+					roleDisplayName,
+					acc.PcsIamServiceRegistrationId,
+					actionDescription,
+					supportedAttributeDisplayName,
+					supportedAttributeInputDetailsDisplayName,
+					supportedAuthorizationSubjectsService,
+					environmentAttributesValues,
+					supportedAnonymousAccessesAdditionalPropValue,
+				),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					testAccCheckIbmOnboardingIamRegistrationExists("ibm_onboarding_iam_registration.onboarding_iam_registration_instance", conf),
 					resource.TestCheckResourceAttr("ibm_onboarding_iam_registration.onboarding_iam_registration_instance", "product_id", productID),
@@ -73,7 +101,22 @@ func TestAccIbmOnboardingIamRegistrationAllArgs(t *testing.T) {
 				),
 			},
 			resource.TestStep{
-				Config: testAccCheckIbmOnboardingIamRegistrationConfig(productID, envUpdate, nameUpdate, enabledUpdate, serviceTypeUpdate, iamRegistrationRole, roleDisplayNameUpdate, acc.PcsIamServiceRegistrationId),
+				Config: testAccCheckIbmOnboardingIamRegistrationConfig(
+					productID,
+					envUpdate,
+					nameUpdate,
+					enabledUpdate,
+					serviceTypeUpdate,
+					iamRegistrationRole,
+					roleDisplayNameUpdate,
+					acc.PcsIamServiceRegistrationId,
+					actionDescriptionUpdate,
+					supportedAttributeDisplayNameUpdate,
+					supportedAttributeInputDetailsDisplayNameUpdate,
+					supportedAuthorizationSubjectsServiceUpdate,
+					environmentAttributesValuesUpdate,
+					supportedAnonymousAccessesAdditionalPropValueUpdate,
+				),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("ibm_onboarding_iam_registration.onboarding_iam_registration_instance", "product_id", productID),
 					resource.TestCheckResourceAttr("ibm_onboarding_iam_registration.onboarding_iam_registration_instance", "env", envUpdate),
@@ -106,7 +149,22 @@ func testAccCheckIbmOnboardingIamRegistrationConfigBasic(productID string, name 
 	`, productID, name, name)
 }
 
-func testAccCheckIbmOnboardingIamRegistrationConfig(productID string, env string, name string, enabled string, serviceType string, iamRegistrationRole string, roleDisplayName string, iamRegistrationID string) string {
+func testAccCheckIbmOnboardingIamRegistrationConfig(
+	productID string,
+	env string,
+	name string,
+	enabled string,
+	serviceType string,
+	iamRegistrationRole string,
+	roleDisplayName string,
+	iamRegistrationID string,
+	actionDescription string,
+	supportedAttributeDisplayName string,
+	supportedAttributeInputDetailsDisplayName string,
+	supportedAuthorizationSubjectsService string,
+	environmentAttributesValues string,
+	supportedAnonymousAccessesAdditionalPropValue string,
+) string {
 	return fmt.Sprintf(`
 
 		resource "ibm_onboarding_iam_registration" "onboarding_iam_registration_instance" {
@@ -119,7 +177,7 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(productID string, env string
 				id = "id"
 				roles = [ "%s" ]
 				description {
-					default = "default"
+					default = "%s"
 					en = "en"
 					de = "de"
 					es = "es"
@@ -171,10 +229,9 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(productID string, env string
 					policy_types = [ "access" ]
 					is_empty_value_supported = true
 					is_string_exists_false_value_supported = true
-					supported_attributes = [	]
 				}
 				display_name {
-					default = "default"
+					default = "%s"
 					en = "en"
 					de = "de"
 					es = "es"
@@ -206,7 +263,7 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(productID string, env string
 						values {
 							value = "testString"
 							display_name {
-								default = "testString"
+								default = "%s"
 								en = "testString"
 								de = "testString"
 								es = "testString"
@@ -229,7 +286,7 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(productID string, env string
 			}
 			supported_authorization_subjects {
 				attributes {
-					service_name = "testString"
+					service_name = "%s"
 					resource_type = "testString"
 				}
 				roles = [ "%s" ]
@@ -250,7 +307,7 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(productID string, env string
 			supported_network {
 				environment_attributes {
 					key = "networkType"
-					values = [ "public" ]
+					values = [ "%s" ]
 					options {
 						hidden = false
 					}
@@ -260,12 +317,12 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(productID string, env string
 				attributes {
 					account_id = "account_id"
 					service_name = "%s"
-					additional_properties = { "testString" = "additionalProps" }
+					additional_properties = { "testString" = "%s" }
 				}
 				roles = [ "%s" ]
 			}
 		}
-	`, productID, env, name, enabled, serviceType, iamRegistrationRole, name, name, iamRegistrationRole, iamRegistrationRole, roleDisplayName, iamRegistrationID, iamRegistrationRole)
+	`, productID, env, name, enabled, serviceType, iamRegistrationRole, actionDescription, name, name, supportedAttributeDisplayName, supportedAttributeInputDetailsDisplayName, supportedAuthorizationSubjectsService, iamRegistrationRole, iamRegistrationRole, roleDisplayName, environmentAttributesValues, iamRegistrationID, supportedAnonymousAccessesAdditionalPropValue, iamRegistrationRole)
 }
 
 func testAccCheckIbmOnboardingIamRegistrationExists(n string, obj partnercentersellv1.IamServiceRegistration) resource.TestCheckFunc {

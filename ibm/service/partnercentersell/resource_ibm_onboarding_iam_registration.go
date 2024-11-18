@@ -1768,12 +1768,16 @@ func ResourceIbmOnboardingIamRegistrationMapToSupportedAttributesOptions(modelMa
 		model.Hidden = core.BoolPtr(modelMap["hidden"].(bool))
 	}
 	if modelMap["supported_attributes"] != nil {
+		fmt.Println("PETYA")
+		fmt.Println(modelMap["supported_attributes"])
 		supportedAttributes := []string{}
+		fmt.Println(supportedAttributes)
 		for _, supportedAttributesItem := range modelMap["supported_attributes"].([]interface{}) {
 			supportedAttributes = append(supportedAttributes, supportedAttributesItem.(string))
 		}
 		model.SupportedAttributes = supportedAttributes
 	}
+
 	if modelMap["policy_types"] != nil {
 		policyTypes := []string{}
 		for _, policyTypesItem := range modelMap["policy_types"].([]interface{}) {
