@@ -20,49 +20,49 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// func TestAccIbmOnboardingCatalogProductBasic(t *testing.T) {
-// 	var conf partnercentersellv1.GlobalCatalogProduct
-// 	baseName := fmt.Sprintf("test-name-terraform-%d", acctest.RandIntRange(10, 100))
-// 	productID := acc.PcsOnboardingProductWithApprovedProgrammaticName
-// 	objectId := fmt.Sprintf("test-object-id-terraform-%d", acctest.RandIntRange(10, 100))
-// 	name := baseName
-// 	active := "true"
-// 	disabled := "false"
-// 	kind := "service"
-// 	nameUpdate := baseName
-// 	activeUpdate := "false"
-// 	disabledUpdate := "false"
-// 	kindUpdate := "service"
+func TestAccIbmOnboardingCatalogProductBasic(t *testing.T) {
+	var conf partnercentersellv1.GlobalCatalogProduct
+	baseName := fmt.Sprintf("test-name-terraform-%d", acctest.RandIntRange(10, 100))
+	productID := acc.PcsOnboardingProductWithApprovedProgrammaticName
+	objectId := fmt.Sprintf("test-object-id-terraform-%d", acctest.RandIntRange(10, 100))
+	name := baseName
+	active := "true"
+	disabled := "false"
+	kind := "service"
+	nameUpdate := baseName
+	activeUpdate := "false"
+	disabledUpdate := "false"
+	kindUpdate := "service"
 
-// 	resource.Test(t, resource.TestCase{
-// 		PreCheck:     func() { acc.TestAccPreCheckPartnerCenterSell(t) },
-// 		Providers:    acc.TestAccProviders,
-// 		CheckDestroy: testAccCheckIbmOnboardingCatalogProductDestroy,
-// 		Steps: []resource.TestStep{
-// 			resource.TestStep{
-// 				Config: testAccCheckIbmOnboardingCatalogProductConfigBasic(productID, name, active, disabled, kind, objectId),
-// 				Check: resource.ComposeAggregateTestCheckFunc(
-// 					testAccCheckIbmOnboardingCatalogProductExists("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", conf),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "product_id", productID),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "name", name),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "active", active),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "disabled", disabled),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "kind", kind),
-// 				),
-// 			},
-// 			resource.TestStep{
-// 				Config: testAccCheckIbmOnboardingCatalogProductConfigBasic(productID, nameUpdate, activeUpdate, disabledUpdate, kindUpdate, objectId),
-// 				Check: resource.ComposeAggregateTestCheckFunc(
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "product_id", productID),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "name", nameUpdate),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "active", activeUpdate),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "disabled", disabledUpdate),
-// 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "kind", kindUpdate),
-// 				),
-// 			},
-// 		},
-// 	})
-// }
+	resource.Test(t, resource.TestCase{
+		PreCheck:     func() { acc.TestAccPreCheckPartnerCenterSell(t) },
+		Providers:    acc.TestAccProviders,
+		CheckDestroy: testAccCheckIbmOnboardingCatalogProductDestroy,
+		Steps: []resource.TestStep{
+			resource.TestStep{
+				Config: testAccCheckIbmOnboardingCatalogProductConfigBasic(productID, name, active, disabled, kind, objectId),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					testAccCheckIbmOnboardingCatalogProductExists("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", conf),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "product_id", productID),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "name", name),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "active", active),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "disabled", disabled),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "kind", kind),
+				),
+			},
+			resource.TestStep{
+				Config: testAccCheckIbmOnboardingCatalogProductConfigBasic(productID, nameUpdate, activeUpdate, disabledUpdate, kindUpdate, objectId),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "product_id", productID),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "name", nameUpdate),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "active", activeUpdate),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "disabled", disabledUpdate),
+					resource.TestCheckResourceAttr("ibm_onboarding_catalog_product.onboarding_catalog_product_instance", "kind", kindUpdate),
+				),
+			},
+		},
+	})
+}
 
 func TestAccIbmOnboardingCatalogProductAllArgs(t *testing.T) {
 	var conf partnercentersellv1.GlobalCatalogProduct
@@ -127,7 +127,7 @@ func TestAccIbmOnboardingCatalogProductAllArgs(t *testing.T) {
 				),
 			},
 			resource.TestStep{
-				Config: testAccCheckIbmOnboardingCatalogProductConfig(
+				Config: testAccCheckIbmOnboardingCatalogProductUpdateConfig(
 					productID,
 					envUpdate,
 					nameUpdate,
@@ -224,6 +224,147 @@ func testAccCheckIbmOnboardingCatalogProductConfig(productID string, env string,
                         		type = "youtube"
                         		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
                         		caption = "%s"
+                    		}
+                		}
+            		}
+					urls {
+						doc_url = "doc_url"
+						terms_url = "terms_url"
+					}
+					hidden = true
+					side_by_side_index = 1.0
+				}
+				service {
+					rc_provisionable = true
+					iam_compatible = false
+				}
+				other {
+				    composite {
+                		children {
+                    		name = "%s"
+                    		kind = "service"
+                		}
+						children {
+                    		name = "secondChild"
+                    		kind = "service"
+                		}
+                		composite_kind = "service"
+                		composite_tag = "composite_tag"
+            		}
+					pc {
+						support {
+							url = "url"
+							process_i18n = {}
+							status_url = "status_url"
+							locations = [ "locations" ]
+							languages = [ "languages" ]
+							support_type = "community"
+							support_escalation {
+								contact = "contact"
+								escalation_wait_time {
+									value = 1.0
+									type = "type"
+								}
+								response_wait_time {
+									value = 1.0
+									type = "type"
+								}
+							}
+							support_details {
+								type = "support_site"
+								contact = "contact"
+								response_wait_time {
+									value = "%s"
+									type = "type"
+								}
+								availability {
+									times {
+										day = "%s"
+										start_time = "start_time"
+										end_time = "end_time"
+									}
+									times {
+										day = "2.0"
+										start_time = "start_time"
+										end_time = "end_time"
+									}
+									timezone = "timezone"
+									always_available = true
+								}
+							}
+							support_details {
+								type = "support_site"
+								contact = "contact"
+								response_wait_time {
+									value = "1.0"
+									type = "type"
+								}
+								availability {
+									times {
+										day = "1.0"
+										start_time = "start_time"
+										end_time = "end_time"
+									}
+									timezone = "timezone"
+									always_available = true
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	`, productID, env, name, active, disabled, kind, objectId, overviewUiEn, rcCompatible, bulletTitleName, mediaCaption, compositeChildrenName, supportDetailsResponseWaitTime, supportDetailsAvailabilityTimesDay)
+}
+
+func testAccCheckIbmOnboardingCatalogProductUpdateConfig(productID string, env string, name string, active string, disabled string, kind string, objectId string, overviewUiEn string, rcCompatible string, bulletTitleName string, mediaCaption string, compositeChildrenName string, supportDetailsResponseWaitTime string, supportDetailsAvailabilityTimesDay string) string {
+	return fmt.Sprintf(`
+
+		resource "ibm_onboarding_catalog_product" "onboarding_catalog_product_instance" {
+			product_id = "%s"
+			env = "%s"
+			name = "%s"
+			active = %s
+			disabled = %s
+			kind = "%s"
+			object_id = "%s"
+			overview_ui {
+				en {
+					display_name = "%s"
+					description = "description"
+					long_description = "long_description"
+				}
+			}
+			tags = ["tag", "support_community"]
+			images {
+				image = "image"
+			}
+			object_provider {
+				name = "name"
+				email = "email@email.com"
+			}
+			metadata {
+				rc_compatible = "%s"
+				ui {
+				    strings {
+                		en {
+                    		bullets {
+                        		title = "%s"
+                        		description = "some1"
+                    		}
+							bullets {
+                        		title = "newBullet"
+                        		description = "some1"
+                    		}
+							media {
+                        		type = "youtube"
+                        		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
+                        		caption = "%s"
+                    		}
+							media {
+                        		type = "youtube"
+                        		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
+                        		caption = "newMedia"
                     		}
                 		}
             		}

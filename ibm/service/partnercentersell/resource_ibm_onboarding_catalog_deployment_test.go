@@ -120,7 +120,7 @@ func TestAccIbmOnboardingCatalogDeploymentAllArgs(t *testing.T) {
 				),
 			},
 			resource.TestStep{
-				Config: testAccCheckIbmOnboardingCatalogDeploymentConfig(productID, catalogProductID, catalogPlanID, envUpdate, nameUpdate, activeUpdate, disabledUpdate, kindUpdate, objectId, overviewUiEnUpdate, rcCompatibleUpdate, iamCompatibleUpdate, deploymentBrokerNameUpdate, bulletTitleNameUpdate, mediaCaptionUpdate),
+				Config: testAccCheckIbmOnboardingCatalogDeploymentUpdateConfig(productID, catalogProductID, catalogPlanID, envUpdate, nameUpdate, activeUpdate, disabledUpdate, kindUpdate, objectId, overviewUiEnUpdate, rcCompatibleUpdate, iamCompatibleUpdate, deploymentBrokerNameUpdate, bulletTitleNameUpdate, mediaCaptionUpdate),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_deployment.onboarding_catalog_deployment_instance", "product_id", productID),
 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_deployment.onboarding_catalog_deployment_instance", "catalog_product_id", catalogProductID),
@@ -224,6 +224,74 @@ func testAccCheckIbmOnboardingCatalogDeploymentConfig(productID string, catalogP
                         		type = "youtube"
                         		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
                         		caption = "%s"
+                    		}
+                		}
+            		}
+        		}
+			}
+		}
+	`, productID, catalogProductID, catalogPlanID, env, name, active, disabled, kind, objectId, overviewUiEn, rcCompatible, iamCompatible, deploymentBrokerName, bulletTitleName, mediaCaption)
+}
+
+func testAccCheckIbmOnboardingCatalogDeploymentUpdateConfig(productID string, catalogProductID string, catalogPlanID string, env string, name string, active string, disabled string, kind string, objectId string, overviewUiEn string, rcCompatible string, iamCompatible string, deploymentBrokerName string, bulletTitleName string, mediaCaption string) string {
+	return fmt.Sprintf(`
+		resource "ibm_onboarding_catalog_deployment" "onboarding_catalog_deployment_instance" {
+			product_id = "%s"
+			catalog_product_id = "%s"
+			catalog_plan_id = "%s"
+			env = "%s"
+			name = "%s"
+			active = %s
+			disabled = %s
+			kind = "%s"
+			object_id = "%s"
+			overview_ui {
+				en {
+					display_name = "%s"
+					description = "description"
+					long_description = "long_description"
+				}
+			}
+			tags = ["sample", "moreSample"]
+			object_provider {
+				name = "name"
+				email = "email@email.com"
+			}
+			metadata {
+				rc_compatible = "%s"
+				service {
+				  	rc_provisionable = true
+  					iam_compatible = "%s"
+				}
+				deployment {
+					broker {
+						name = "%s"
+						guid = "guid"
+					}
+					location = "ams03"
+					location_url = "https://globalcatalog.test.cloud.ibm.com/api/v1/ams03"
+					target_crn = "crn:v1:staging:public::ams03:::environment:staging-ams03"
+				}
+				ui {
+            		strings {
+                		en {
+                    		bullets {
+                        		title = "%s"
+                        		description = "some1"
+                    		}
+							bullets {
+                        		title = "newBullet"
+                        		description = "some1"
+                    		}
+							media {
+                        		type = "youtube"
+                        		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
+                        		caption = "%s"
+                    		}
+							media {
+                        		type = "youtube"
+                        		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
+                        		caption = "newMedia"
                     		}
                 		}
             		}

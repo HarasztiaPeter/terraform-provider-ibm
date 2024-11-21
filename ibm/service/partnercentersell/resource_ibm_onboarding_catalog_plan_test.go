@@ -113,7 +113,7 @@ func TestAccIbmOnboardingCatalogPlanAllArgs(t *testing.T) {
 				),
 			},
 			resource.TestStep{
-				Config: testAccCheckIbmOnboardingCatalogPlanConfig(productID, catalogProductID, envUpdate, nameUpdate, activeUpdate, disabledUpdate, kindUpdate, objectId, overviewUiEnUpdate, rcCompatibleUpdate, pricingTypeUpdate, allowInternalUsersUpdate, bulletTitleNameUpdate, mediaCaptionUpdate),
+				Config: testAccCheckIbmOnboardingCatalogPlanUpdateConfig(productID, catalogProductID, envUpdate, nameUpdate, activeUpdate, disabledUpdate, kindUpdate, objectId, overviewUiEnUpdate, rcCompatibleUpdate, pricingTypeUpdate, allowInternalUsersUpdate, bulletTitleNameUpdate, mediaCaptionUpdate),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_plan.onboarding_catalog_plan_instance", "product_id", productID),
 					resource.TestCheckResourceAttr("ibm_onboarding_catalog_plan.onboarding_catalog_plan_instance", "catalog_product_id", catalogProductID),
@@ -211,6 +211,69 @@ func testAccCheckIbmOnboardingCatalogPlanConfig(productID string, catalogProduct
                         		type = "youtube"
                         		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
                         		caption = "%s"
+                    		}
+                		}
+            		}
+        		}
+			}
+		}
+	`, productID, catalogProductID, env, name, active, disabled, kind, objectId, overviewUiEn, rcCompatible, pricingType, allowInternalUsers, bulletTitleName, mediaCaption)
+}
+
+func testAccCheckIbmOnboardingCatalogPlanUpdateConfig(productID string, catalogProductID string, env string, name string, active string, disabled string, kind string, objectId string, overviewUiEn string, rcCompatible string, pricingType string, allowInternalUsers string, bulletTitleName string, mediaCaption string) string {
+	return fmt.Sprintf(`
+
+		resource "ibm_onboarding_catalog_plan" "onboarding_catalog_plan_instance" {
+			product_id = "%s"
+			catalog_product_id = "%s"
+			env = "%s"
+			name = "%s"
+			active = %s
+			disabled = %s
+			kind = "%s"
+			object_id = "%s"
+			overview_ui {
+				en {
+					display_name = "%s"
+					description = "description"
+					long_description = "long_description"
+				}
+			}
+			tags = ["tag"]
+			object_provider {
+				name = "name"
+				email = "email@email.com"
+			}
+			metadata {
+				rc_compatible = "%s"
+				pricing {
+					type = "%s"
+					origin = "global_catalog"
+				}
+				plan {
+					allow_internal_users = "%s"
+					bindable = false
+				}
+				ui {
+            		strings {
+                		en {
+                    		bullets {
+                        		title = "%s"
+                        		description = "some1"
+                    		}
+							bullets {
+                        		title = "newBullet"
+                        		description = "some1"
+                    		}
+							media {
+                        		type = "youtube"
+                        		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
+                        		caption = "%s"
+                    		}
+							media {
+                        		type = "youtube"
+                        		url = "https://www.youtube.com/embed/HtkpMgNFYtE"
+                        		caption = "newMedia"
                     		}
                 		}
             		}
