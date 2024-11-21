@@ -62,8 +62,12 @@ resource "ibm_onboarding_iam_registration" "onboarding_iam_registration_instance
 		zh_tw = "zh_tw"
 		zh_cn = "zh_cn"
   }
+<<<<<<< HEAD
   enabled = true
   name = "pet-store"
+=======
+  name = "name"
+>>>>>>> origin/master
   product_id = ibm_onboarding_product.onboarding_product_instance.id
   resource_hierarchy_attribute {
 		key = "key"
@@ -202,7 +206,10 @@ resource "ibm_onboarding_iam_registration" "onboarding_iam_registration_instance
 		}
 		options {
 			access_policy = true
+<<<<<<< HEAD
 			additional_properties_for_access_policy = { "key" = "inner" }
+=======
+>>>>>>> origin/master
 			policy_type = [ "access" ]
 			account_type = "enterprise"
 		}

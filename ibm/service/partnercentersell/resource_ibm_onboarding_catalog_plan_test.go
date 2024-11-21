@@ -196,6 +196,7 @@ func testAccCheckIbmOnboardingCatalogPlanConfig(productID string, catalogProduct
 					type = "%s"
 					origin = "global_catalog"
 				}
+<<<<<<< HEAD
 				plan {
 					allow_internal_users = "%s"
 					bindable = false
@@ -215,6 +216,19 @@ func testAccCheckIbmOnboardingCatalogPlanConfig(productID string, catalogProduct
                 		}
             		}
         		}
+=======
+				service {
+					rc_provisionable = true
+					iam_compatible = true
+					bindable = true
+					plan_updateable = true
+					service_key_supported = true
+				}
+				plan {
+					allow_internal_users = true
+					bindable = true
+				}
+>>>>>>> origin/master
 			}
 		}
 	`, productID, catalogProductID, env, name, active, disabled, kind, objectId, overviewUiEn, rcCompatible, pricingType, allowInternalUsers, bulletTitleName, mediaCaption)

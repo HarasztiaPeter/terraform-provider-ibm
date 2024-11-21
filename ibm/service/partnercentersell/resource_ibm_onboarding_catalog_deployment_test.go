@@ -214,6 +214,7 @@ func testAccCheckIbmOnboardingCatalogDeploymentConfig(productID string, catalogP
 					target_crn = "crn:v1:staging:public::ams03:::environment:staging-ams03"
 				}
 				ui {
+<<<<<<< HEAD
             		strings {
                 		en {
                     		bullets {
@@ -228,6 +229,20 @@ func testAccCheckIbmOnboardingCatalogDeploymentConfig(productID string, catalogP
                 		}
             		}
         		}
+=======
+					hidden = true
+					side_by_side_index = 1.0
+				}
+				deployment {
+					broker {
+						name = "broker-petra-1"
+						guid = "guid"
+					}
+					location = "ams03"
+					location_url = "https://globalcatalog.test.cloud.ibm.com/api/v1/ams03"
+					target_crn = "crn:v1:staging:public::ams03:::environment:staging-ams03"
+				}
+>>>>>>> origin/master
 			}
 		}
 	`, productID, catalogProductID, catalogPlanID, env, name, active, disabled, kind, objectId, overviewUiEn, rcCompatible, iamCompatible, deploymentBrokerName, bulletTitleName, mediaCaption)

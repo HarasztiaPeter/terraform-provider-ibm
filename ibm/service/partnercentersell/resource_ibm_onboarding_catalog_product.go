@@ -1210,7 +1210,11 @@ func ResourceIbmOnboardingCatalogProductMapToGlobalCatalogProductMetadataOther(m
 		}
 		model.PC = PCModel
 	}
+<<<<<<< HEAD
 	if modelMap["composite"] != nil && len(modelMap["composite"].([]interface{})) > 0 && modelMap["composite"].([]interface{})[0] != nil {
+=======
+	if modelMap["composite"] != nil && len(modelMap["composite"].([]interface{})) > 0 {
+>>>>>>> origin/master
 		CompositeModel, err := ResourceIbmOnboardingCatalogProductMapToGlobalCatalogProductMetadataOtherComposite(modelMap["composite"].([]interface{})[0].(map[string]interface{}))
 		if err != nil {
 			return model, err
@@ -1955,7 +1959,11 @@ func ResourceIbmOnboardingCatalogProductGlobalCatalogProductMetadataOtherComposi
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
 		patch["children"] = nil
 	} else if exists && patch["children"] != nil {
+<<<<<<< HEAD
 		ResourceIbmOnboardingCatalogProductGlobalCatalogProductMetadataOtherCompositeChildAsPatch(patch["children"].([]map[string]interface{})[0], d)
+=======
+		ResourceIbmOnboardingCatalogProductGlobalCatalogProductMetadataOtherCompositeChildAsPatch(patch["children"].([]interface{})[0].(map[string]interface{}), d)
+>>>>>>> origin/master
 	}
 }
 
@@ -2229,6 +2237,10 @@ func ResourceIbmOnboardingCatalogProductGlobalCatalogMetadataUIStringsContentAsP
 		patch["media"] = nil
 	} else if exists && patch["media"] != nil {
 		ResourceIbmOnboardingCatalogProductCatalogProductMediaItemAsPatch(patch["media"].([]map[string]interface{})[0], d)
+	}
+	path = "metadata.0.ui.0.strings.0.en.0.embeddable_dashboard"
+	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
+		patch["embeddable_dashboard"] = nil
 	}
 	path = "metadata.0.ui.0.strings.0.en.0.embeddable_dashboard"
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {

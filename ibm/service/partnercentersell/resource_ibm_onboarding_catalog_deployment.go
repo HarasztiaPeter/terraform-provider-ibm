@@ -850,7 +850,11 @@ func ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogDeploymentMetadata(
 		}
 		model.Service = ServiceModel
 	}
+<<<<<<< HEAD
 	if modelMap["deployment"] != nil && len(modelMap["deployment"].([]interface{})) > 0 && modelMap["deployment"].([]interface{})[0] != nil {
+=======
+	if modelMap["deployment"] != nil && len(modelMap["deployment"].([]interface{})) > 0 {
+>>>>>>> origin/master
 		DeploymentModel, err := ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataDeployment(modelMap["deployment"].([]interface{})[0].(map[string]interface{}))
 		if err != nil {
 			return model, err
@@ -1021,7 +1025,11 @@ func ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataService(mod
 
 func ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataDeployment(modelMap map[string]interface{}) (*partnercentersellv1.GlobalCatalogMetadataDeployment, error) {
 	model := &partnercentersellv1.GlobalCatalogMetadataDeployment{}
+<<<<<<< HEAD
 	if modelMap["broker"] != nil && len(modelMap["broker"].([]interface{})) > 0 && modelMap["broker"].([]interface{})[0] != nil {
+=======
+	if modelMap["broker"] != nil && len(modelMap["broker"].([]interface{})) > 0 {
+>>>>>>> origin/master
 		BrokerModel, err := ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataDeploymentBroker(modelMap["broker"].([]interface{})[0].(map[string]interface{}))
 		if err != nil {
 			return model, err
@@ -1514,6 +1522,10 @@ func ResourceIbmOnboardingCatalogDeploymentGlobalCatalogMetadataUIStringsContent
 		patch["media"] = nil
 	} else if exists && patch["media"] != nil {
 		ResourceIbmOnboardingCatalogDeploymentCatalogProductMediaItemAsPatch(patch["media"].([]map[string]interface{})[0], d)
+	}
+	path = "metadata.0.ui.0.strings.0.en.0.embeddable_dashboard"
+	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
+		patch["embeddable_dashboard"] = nil
 	}
 	path = "metadata.0.ui.0.strings.0.en.0.embeddable_dashboard"
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {

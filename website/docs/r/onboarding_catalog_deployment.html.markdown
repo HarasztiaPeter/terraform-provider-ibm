@@ -28,13 +28,13 @@ resource "ibm_onboarding_catalog_deployment" "onboarding_catalog_deployment_inst
 				en {
 					bullets {
 						description = "description"
-						description_i18n = { "key" = "inner" }
+						description_i18n = { "key" = "anything as a string" }
 						title = "title"
-						title_i18n = { "key" = "inner" }
+						title_i18n = { "key" = "anything as a string" }
 					}
 					media {
 						caption = "caption"
-						caption_i18n = { "key" = "inner" }
+						caption_i18n = { "key" = "anything as a string" }
 						thumbnail = "thumbnail"
 						type = "image"
 						url = "url"

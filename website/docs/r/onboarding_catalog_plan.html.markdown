@@ -27,13 +27,13 @@ resource "ibm_onboarding_catalog_plan" "onboarding_catalog_plan_instance" {
 				en {
 					bullets {
 						description = "description"
-						description_i18n = { "key" = "inner" }
+						description_i18n = { "key" = "anything as a string" }
 						title = "title"
-						title_i18n = { "key" = "inner" }
+						title_i18n = { "key" = "anything as a string" }
 					}
 					media {
 						caption = "caption"
-						caption_i18n = { "key" = "inner" }
+						caption_i18n = { "key" = "anything as a string" }
 						thumbnail = "thumbnail"
 						type = "image"
 						url = "url"
@@ -108,7 +108,11 @@ Nested schema for **metadata**:
 		* `origin` - (Optional, String) The source of the pricing information: global_catalog or pricing_catalog.
 		  * Constraints: Allowable values are: `global_catalog`, `pricing_catalog`.
 		* `type` - (Optional, String) The type of the pricing plan.
+<<<<<<< HEAD
 		  * Constraints: Allowable values are: `free`, `paid`, `subscription`.
+=======
+		  * Constraints: Allowable values are: `free`, `paid`, `Free`, `Paid`, `subscription`, `Subscription`.
+>>>>>>> origin/master
 	* `rc_compatible` - (Optional, Boolean) Whether the object is compatible with the resource controller service.
 	* `service` - (Optional, List) The global catalog metadata of the service.
 	Nested schema for **service**:
