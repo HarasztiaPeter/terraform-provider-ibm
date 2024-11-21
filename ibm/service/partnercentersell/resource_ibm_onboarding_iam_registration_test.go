@@ -52,6 +52,7 @@ func TestAccIbmOnboardingIamRegistrationAllArgs(t *testing.T) {
 	serviceType := "platform_service"
 	envUpdate := "current"
 	roleDisplayNameUpdate := fmt.Sprintf("random-%d", acctest.RandIntRange(10, 100))
+	iamRegistrationRoleUpdate := fmt.Sprintf("crn:v1:bluemix:public:%s::::serviceRole:%s", acc.PcsIamServiceRegistrationId, roleDisplayNameUpdate)
 	nameUpdate := acc.PcsIamServiceRegistrationId
 	enabledUpdate := "true"
 	serviceTypeUpdate := "service"
@@ -101,13 +102,13 @@ func TestAccIbmOnboardingIamRegistrationAllArgs(t *testing.T) {
 				),
 			},
 			resource.TestStep{
-				Config: testAccCheckIbmOnboardingIamRegistrationConfig(
+				Config: testAccCheckIbmOnboardingIamRegistrationUpdateConfig(
 					productID,
 					envUpdate,
 					nameUpdate,
 					enabledUpdate,
 					serviceTypeUpdate,
-					iamRegistrationRole,
+					iamRegistrationRoleUpdate,
 					roleDisplayNameUpdate,
 					acc.PcsIamServiceRegistrationId,
 					actionDescriptionUpdate,
@@ -166,7 +167,6 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(
 	supportedAnonymousAccessesAdditionalPropValue string,
 ) string {
 	return fmt.Sprintf(`
-
 		resource "ibm_onboarding_iam_registration" "onboarding_iam_registration_instance" {
 			product_id = "%s"
 			env = "%s"
@@ -323,6 +323,250 @@ func testAccCheckIbmOnboardingIamRegistrationConfig(
 			}
 		}
 	`, productID, env, name, enabled, serviceType, iamRegistrationRole, actionDescription, name, name, supportedAttributeDisplayName, supportedAttributeInputDetailsDisplayName, supportedAuthorizationSubjectsService, iamRegistrationRole, iamRegistrationRole, roleDisplayName, environmentAttributesValues, iamRegistrationID, supportedAnonymousAccessesAdditionalPropValue, iamRegistrationRole)
+}
+
+func testAccCheckIbmOnboardingIamRegistrationUpdateConfig(
+	productID string,
+	env string,
+	name string,
+	enabled string,
+	serviceType string,
+	iamRegistrationRole string,
+	roleDisplayName string,
+	iamRegistrationID string,
+	actionDescription string,
+	supportedAttributeDisplayName string,
+	supportedAttributeInputDetailsDisplayName string,
+	supportedAuthorizationSubjectsService string,
+	environmentAttributesValues string,
+	supportedAnonymousAccessesAdditionalPropValue string,
+) string {
+	roleDisplayName2 := fmt.Sprintf("random-2-%d", acctest.RandIntRange(10, 100))
+	iamRegistrationRole2 := fmt.Sprintf("crn:v1:bluemix:public:%s::::serviceRole:%s", iamRegistrationID, roleDisplayName2)
+
+	return fmt.Sprintf(`
+		resource "ibm_onboarding_iam_registration" "onboarding_iam_registration_instance" {
+			product_id = "%s"
+			env = "%s"
+			name = "%s"
+			enabled = %s
+			service_type = "%s"
+			actions {
+				id = "id"
+				roles = [ "%s", "%s" ]
+				description {
+					default = "%s"
+					en = "en"
+					de = "de"
+					es = "es"
+					fr = "fr"
+					it = "it"
+					ja = "ja"
+					ko = "ko"
+					pt_br = "pt_br"
+					zh_tw = "zh_tw"
+					zh_cn = "zh_cn"
+				}
+				display_name {
+					default = "default"
+					en = "en"
+					de = "de"
+					es = "es"
+					fr = "fr"
+					it = "it"
+					ja = "ja"
+					ko = "ko"
+					pt_br = "pt_br"
+					zh_tw = "zh_tw"
+					zh_cn = "zh_cn"
+				}
+				options {
+					hidden = true
+				}
+			}
+			actions {
+				id = "idtwo"
+				roles = [ "%s" ]
+				description {
+					default = "default"
+					en = "en"
+					de = "de"
+					es = "es"
+					fr = "fr"
+					it = "it"
+					ja = "ja"
+					ko = "ko"
+					pt_br = "pt_br"
+					zh_tw = "zh_tw"
+					zh_cn = "zh_cn"
+				}
+				display_name {
+					default = "default"
+					en = "en"
+					de = "de"
+					es = "es"
+					fr = "fr"
+					it = "it"
+					ja = "ja"
+					ko = "ko"
+					pt_br = "pt_br"
+					zh_tw = "zh_tw"
+					zh_cn = "zh_cn"
+				}
+				options {
+					hidden = true
+				}
+			}
+			additional_policy_scopes = ["%s", "%s.some"]
+			display_name {
+				default = "%s"
+				en = "en"
+				de = "de"
+				es = "es"
+				fr = "fr"
+				it = "it"
+				ja = "ja"
+				ko = "ko"
+				pt_br = "pt_br"
+				zh_tw = "zh_tw"
+				zh_cn = "zh_cn"
+			}
+			parent_ids = ["05ca8653-de25-49fa-a14d-aaa5d373bc22"]	
+			supported_attributes {
+				key = "testString"
+				options {
+					operators = [ "stringEquals" ]
+					hidden = false
+					policy_types = [ "access" ]
+					is_empty_value_supported = true
+					is_string_exists_false_value_supported = true
+				}
+				display_name {
+					default = "%s"
+					en = "en"
+					de = "de"
+					es = "es"
+					fr = "fr"
+					it = "it"
+					ja = "ja"
+					ko = "ko"
+					pt_br = "pt_br"
+					zh_tw = "zh_tw"
+					zh_cn = "zh_cn"
+				}
+				description {
+					default = "default"
+					en = "en"
+					de = "de"
+					es = "es"
+					fr = "fr"
+					it = "it"
+					ja = "ja"
+					ko = "ko"
+					pt_br = "pt_br"
+					zh_tw = "zh_tw"
+					zh_cn = "zh_cn"
+				}
+				ui {
+					input_type = "selector"
+					input_details {
+						type = "gst"
+						values {
+							value = "testString"
+							display_name {
+								default = "%s"
+								en = "testString"
+								de = "testString"
+								es = "testString"
+								fr = "testString"
+								it = "testString"
+								ja = "testString"
+								ko = "testString"
+								pt_br = "testString"
+								zh_tw = "testString"
+								zh_cn = "testString"
+							}
+						}
+						gst {
+							query = "query"
+							value_property_name = "teststring"
+							input_option_label = "{name} - {instance_id}"
+						}
+					}
+				}
+			}
+			supported_attributes {
+        		key = "some-attribute"
+        		display_name {
+            		default = "some-attribute"
+        		}
+        		description {
+            		default = "some-attribute"
+        		}
+       			 ui {
+            		input_type = "string"
+       			}
+    		}
+			supported_authorization_subjects {
+				attributes {
+					service_name = "%s"
+					resource_type = "testString"
+				}
+				roles = [ "%s" ]
+			}
+			supported_roles {
+				id = "%s"
+				description {
+					default = "desc"
+				}
+				display_name {
+					default = "%s"
+				}
+				options {
+					access_policy = true
+					policy_type = [ "access" ]
+				}
+			}
+			supported_roles {
+				id = "%s"
+				description {
+					default = "default"
+				}
+				display_name {
+					default = "%s"
+				}
+				options {
+					access_policy = true
+					policy_type = [ "access" ]
+				}
+			}
+			supported_network {
+				environment_attributes {
+					key = "networkType"
+					values = [ "%s" ]
+					options {
+						hidden = true
+					}
+				}
+			}
+			supported_anonymous_accesses {
+				attributes {
+					account_id = "account_id"
+					service_name = "%s"
+					additional_properties = { "testString" = "%s" }
+				}
+				roles = [ "%s" ]
+			}
+			supported_anonymous_accesses {
+				attributes {
+					account_id = "account_id"
+					service_name = "%s"
+					additional_properties = { "testString" = "something" }
+				}
+				roles = [ "%s" ]
+			}
+		}
+	`, productID, env, name, enabled, serviceType, iamRegistrationRole, iamRegistrationRole2, iamRegistrationRole, iamRegistrationRole, name, name, name, supportedAttributeDisplayName, supportedAttributeInputDetailsDisplayName, supportedAuthorizationSubjectsService, iamRegistrationRole, iamRegistrationRole, roleDisplayName, iamRegistrationRole2, roleDisplayName2, environmentAttributesValues, iamRegistrationID, supportedAnonymousAccessesAdditionalPropValue, iamRegistrationRole, iamRegistrationID, iamRegistrationRole)
 }
 
 func testAccCheckIbmOnboardingIamRegistrationExists(n string, obj partnercentersellv1.IamServiceRegistration) resource.TestCheckFunc {
