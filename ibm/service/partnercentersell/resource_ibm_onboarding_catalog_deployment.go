@@ -850,11 +850,7 @@ func ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogDeploymentMetadata(
 		}
 		model.Service = ServiceModel
 	}
-<<<<<<< HEAD
 	if modelMap["deployment"] != nil && len(modelMap["deployment"].([]interface{})) > 0 && modelMap["deployment"].([]interface{})[0] != nil {
-=======
-	if modelMap["deployment"] != nil && len(modelMap["deployment"].([]interface{})) > 0 {
->>>>>>> origin/master
 		DeploymentModel, err := ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataDeployment(modelMap["deployment"].([]interface{})[0].(map[string]interface{}))
 		if err != nil {
 			return model, err
@@ -1025,11 +1021,7 @@ func ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataService(mod
 
 func ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataDeployment(modelMap map[string]interface{}) (*partnercentersellv1.GlobalCatalogMetadataDeployment, error) {
 	model := &partnercentersellv1.GlobalCatalogMetadataDeployment{}
-<<<<<<< HEAD
 	if modelMap["broker"] != nil && len(modelMap["broker"].([]interface{})) > 0 && modelMap["broker"].([]interface{})[0] != nil {
-=======
-	if modelMap["broker"] != nil && len(modelMap["broker"].([]interface{})) > 0 {
->>>>>>> origin/master
 		BrokerModel, err := ResourceIbmOnboardingCatalogDeploymentMapToGlobalCatalogMetadataDeploymentBroker(modelMap["broker"].([]interface{})[0].(map[string]interface{}))
 		if err != nil {
 			return model, err

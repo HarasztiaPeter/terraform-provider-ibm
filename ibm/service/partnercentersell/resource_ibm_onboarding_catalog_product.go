@@ -1210,11 +1210,7 @@ func ResourceIbmOnboardingCatalogProductMapToGlobalCatalogProductMetadataOther(m
 		}
 		model.PC = PCModel
 	}
-<<<<<<< HEAD
 	if modelMap["composite"] != nil && len(modelMap["composite"].([]interface{})) > 0 && modelMap["composite"].([]interface{})[0] != nil {
-=======
-	if modelMap["composite"] != nil && len(modelMap["composite"].([]interface{})) > 0 {
->>>>>>> origin/master
 		CompositeModel, err := ResourceIbmOnboardingCatalogProductMapToGlobalCatalogProductMetadataOtherComposite(modelMap["composite"].([]interface{})[0].(map[string]interface{}))
 		if err != nil {
 			return model, err
@@ -1959,11 +1955,7 @@ func ResourceIbmOnboardingCatalogProductGlobalCatalogProductMetadataOtherComposi
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
 		patch["children"] = nil
 	} else if exists && patch["children"] != nil {
-<<<<<<< HEAD
 		ResourceIbmOnboardingCatalogProductGlobalCatalogProductMetadataOtherCompositeChildAsPatch(patch["children"].([]map[string]interface{})[0], d)
-=======
-		ResourceIbmOnboardingCatalogProductGlobalCatalogProductMetadataOtherCompositeChildAsPatch(patch["children"].([]interface{})[0].(map[string]interface{}), d)
->>>>>>> origin/master
 	}
 }
 
