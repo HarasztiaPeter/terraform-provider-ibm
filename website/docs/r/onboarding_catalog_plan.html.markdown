@@ -8,8 +8,6 @@ subcategory: "Partner Center Sell"
 
 # ibm_onboarding_catalog_plan
 
-**Note - Intended for internal use only. This resource is strictly experimental and subject to change without notice.**
-
 Create, update, and delete onboarding_catalog_plans with this resource.
 
 ## Example Usage
@@ -198,7 +196,7 @@ You can import the `ibm_onboarding_catalog_plan` resource by using `id`.
 The `id` property can be formed from `product_id`, `catalog_product_id`, and `catalog_plan_id` in the following format:
 
 <pre>
-product_id/catalog_product_id/catalog_plan_id
+&lt;product_id&gt;/&lt;catalog_product_id&gt;/&lt;catalog_plan_id&gt;
 </pre>
 * `product_id`: A string. The unique ID of the product.
 * `catalog_product_id`: A string. The unique ID of this global catalog product.
@@ -206,5 +204,5 @@ product_id/catalog_product_id/catalog_plan_id
 
 # Syntax
 <pre>
-$ terraform import ibm_onboarding_catalog_plan.onboarding_catalog_plan product_id/catalog_product_id/catalog_plan_id;
+$ terraform import ibm_onboarding_catalog_plan.onboarding_catalog_plan &lt;product_id&gt;/&lt;catalog_product_id&gt;/&lt;catalog_plan_id&gt;
 </pre>

@@ -2,7 +2,7 @@
 // Licensed under the Mozilla Public License v2.0
 
 /*
- * IBM OpenAPI Terraform Generator Version: 3.96.0-d6dec9d7-20241008-212902
+ * IBM OpenAPI Terraform Generator Version: 3.97.0-0e90eab1-20241120-170029
  */
 
 package partnercentersell
@@ -393,7 +393,7 @@ func ResourceIbmOnboardingIamRegistration() *schema.Resource {
 										Optional:    true,
 										Description: "Optional opt-in if attribute is hidden from customers (customer can still use it if they found out themselves).",
 									},
-									"supported_attributes": &schema.Schema{
+									"supported_patterns": &schema.Schema{
 										Type:        schema.TypeList,
 										Optional:    true,
 										Description: "The list of supported patterns.",
@@ -1767,12 +1767,12 @@ func ResourceIbmOnboardingIamRegistrationMapToSupportedAttributesOptions(modelMa
 	if modelMap["hidden"] != nil {
 		model.Hidden = core.BoolPtr(modelMap["hidden"].(bool))
 	}
-	if modelMap["supported_attributes"] != nil {
-		supportedAttributes := []string{}
-		for _, supportedAttributesItem := range modelMap["supported_attributes"].([]interface{}) {
-			supportedAttributes = append(supportedAttributes, supportedAttributesItem.(string))
+	if modelMap["supported_patterns"] != nil {
+		supportedPatterns := []string{}
+		for _, supportedPatternsItem := range modelMap["supported_patterns"].([]interface{}) {
+			supportedPatterns = append(supportedPatterns, supportedPatternsItem.(string))
 		}
-		model.SupportedAttributes = supportedAttributes
+		model.SupportedPatterns = supportedPatterns
 	}
 	if modelMap["policy_types"] != nil {
 		policyTypes := []string{}
@@ -1809,7 +1809,7 @@ func ResourceIbmOnboardingIamRegistrationMapToSupportedAttributesOptionsResource
 		}
 		model.Key = KeyModel
 	}
-	if modelMap["value"] != nil && len(modelMap["value"].([]interface{})) > 0 && modelMap["value"].([]interface{})[0] != nil {
+	if modelMap["value"] != nil && len(modelMap["value"].([]interface{})) > 0 {
 		ValueModel, err := ResourceIbmOnboardingIamRegistrationMapToSupportedAttributesOptionsResourceHierarchyValue(modelMap["value"].([]interface{})[0].(map[string]interface{}))
 		if err != nil {
 			return model, err
@@ -2527,7 +2527,7 @@ func ResourceIbmOnboardingIamRegistrationIamServiceRegistrationPatchAsPatch(patc
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
 		patch["actions"] = nil
 	} else if exists && patch["actions"] != nil {
-		ResourceIbmOnboardingIamRegistrationIamServiceRegistrationActionAsPatch(patch["actions"].([]map[string]interface{})[0], d)
+		ResourceIbmOnboardingIamRegistrationIamServiceRegistrationActionAsPatch(patch["actions"].([]interface{})[0].(map[string]interface{}), d)
 	}
 	path = "additional_policy_scopes"
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
@@ -2747,7 +2747,7 @@ func ResourceIbmOnboardingIamRegistrationSupportedAttributeUiInputDetailsAsPatch
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
 		patch["values"] = nil
 	} else if exists && patch["values"] != nil {
-		ResourceIbmOnboardingIamRegistrationSupportedAttributeUiInputValueAsPatch(patch["values"].([]map[string]interface{})[0], d)
+		ResourceIbmOnboardingIamRegistrationSupportedAttributeUiInputValueAsPatch(patch["values"].([]interface{})[0].(map[string]interface{}), d)
 	}
 	path = "supported_attributes.0.ui.0.input_details.0.gst"
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
@@ -2823,9 +2823,9 @@ func ResourceIbmOnboardingIamRegistrationSupportedAttributesOptionsAsPatch(patch
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
 		patch["hidden"] = nil
 	}
-	path = "supported_attributes.0.options.0.supported_attributes"
+	path = "supported_attributes.0.options.0.supported_patterns"
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
-		patch["supported_attributes"] = nil
+		patch["supported_patterns"] = nil
 	}
 	path = "supported_attributes.0.options.0.policy_types"
 	if _, exists := d.GetOk(path); d.HasChange(path) && !exists {
